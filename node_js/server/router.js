@@ -5,7 +5,6 @@ function route(response, request) {
 	if (typeof handle[pathname] === 'function') {
 		handle[pathname](response, request, pathname);
 	} else if (handle.getResources(response, request, pathname)) {
-		console.log("get resources...");
 	} else {
 		console.error("No request handler found for " + pathname);
 		response.writeHead(404, { "Content-Type" : "text/html" });

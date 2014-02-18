@@ -1,6 +1,6 @@
 var querystring = require("querystring"), fs = require("fs"), formidable = require("formidable");
 function start(response) {
-	console.log(path.join(__dirname,"./main.js"));
+	console.log(path.join(__dirname, "./main.js"));
 	console.log("Request handler 'start' was called.");
 	var body = '<html>' + '<head>' + '<meta http-equiv="Content-Type" content="text/html; ' + 'charset=UTF-8" />' + '</head>' + '<body>' + '<form action="/upload" enctype="multipart/form-data" ' + 'method="post">' + '<input type="file" name="upload" multiple="multiple">' + '<input type="submit" value="Upload file" />' + '</form>' + '</body>' + '</html>';
 	response.writeHead(200, { "Content-Type" : "text/html" });
@@ -35,9 +35,22 @@ function show(response) {
 	});
 }
 function getResources(response, request, pathName) {
-	fs.readFile();
+	console.log("dirname" + __filename);
+	console.log("dirname" + __dirname);
+	fs
+	.readFile(settings.PROJECT_DIR + pathName.replace(/\//g, "\\"), "binary", function(error, file) {
+		if (error) {
+			response.writeHead(500, { "Content-Type" : "text/plain" });
+			response.write(error + "\n");
+			response.end();
+		} else {
+			response.writeHead(200, { "Content-Type" : "image/png" });
+			response.write(file, "binary");
+			response.end();
+		}
+	});
 }
 exports["/start"] = start;
 exports["/upload"] = upload;
 exports["/show"] = show;
-exports["/getResources"] = getResources;
+exports["getResources"] = getResources;
