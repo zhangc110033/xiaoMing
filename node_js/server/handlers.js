@@ -1,4 +1,4 @@
-var querystring = require("querystring"), fs = require("fs"), formidable = require("formidable");
+var querystring = require("querystring"), fs = require("fs"), formidable = require("formidable"), extension = require("./extension");
 function start(response) {
 	console.log("Request handler 'start' was called.");
 	var body = '<html>' + '<head>' + '<meta http-equiv="Content-Type" content="text/html; ' + 'charset=UTF-8" />' + '</head>' + '<body>' + '<form action="/upload" enctype="multipart/form-data" ' + 'method="post">' + '<input type="file" name="upload" multiple="multiple">' + '<input type="submit" value="Upload file" />' + '</form>' + '</body>' + '</html>';
@@ -38,13 +38,15 @@ function getResources(response, request, pathName) {
 	//没有具体路径,默认访问index.html.有路径将"/"转换成"\"
 	var resPath = rootPath + (pathName === "/" ? "\\index.html" : pathName
 	.replace(/\//g, "\\"));
+	//文件后缀名
+	var pathArr = resPath.split("."), exts = pathArr[pathArr.length-1];
 	fs.readFile(resPath, "binary", function(error, file) {
 		if (error) {
-			console.log("exception!!!");
 			global.exception._400(response);
 		} else {
-			console.log("success!!!");
-			response.writeHead(200, { "Content-Type" : "text/html" });
+			console.log("extension : "+extension);
+			response
+			.writeHead(200, { "Content-Type" : extension[exts] || "text/html" });
 			response.write(file, "binary");
 			response.end();
 		}
