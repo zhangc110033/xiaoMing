@@ -1,4 +1,4 @@
-var http = require("http"), url = require("url"), handle = require("./requestHandlers");
+var http = require("http"), url = require("url"), handle = require("./handlers");
 function route(response, request) {
 	var pathname = url.parse(request.url).pathname;
 	console.log("Request for " + pathname + " received.");

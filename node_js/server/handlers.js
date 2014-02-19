@@ -35,10 +35,12 @@ function show(response) {
 	});
 }
 function getResources(response, request, pathName) {
-	var webResPath = global.projPath + "\\web_resources";
-	console.log("dirname : " + webResPath + pathName.replace(/\//g, "\\"));
-	fs
-	.readFile(webResPath + pathName.replace(/\//g, "\\"), "binary", function(error, file) {
+	var rootPath = global.projPath + "\\web_resources";
+	var resPath = rootPath + (pathName == "/" ? "\\index.html" : pathName
+	.replace(/\//g, "\\"));
+	console.log("pathName : " + pathName);
+	console.log("path : " + resPath);
+	fs.readFile(resPath, "binary", function(error, file) {
 		if (error) {
 			console.log("exception!!!");
 			response.writeHead(404, { "Content-Type" : "text/plain" });

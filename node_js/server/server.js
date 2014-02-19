@@ -1,7 +1,7 @@
-var http = require("http"),router = require("./router");
+var http = require("http"),route = require("./route");
 function start(handle) {
 	function onRequest(request, response) {
-		router.route(response, request);
+		route.route(response, request);
 	}
 	http.createServer(onRequest).listen(8888);
 	console.warn("Server has started.");
