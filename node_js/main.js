@@ -1,5 +1,5 @@
 //	ΩÃ≥Ã¡¥Ω”
 //	http://www.nodebeginner.org/index-zh-cn.html
-Global.projPath = _dianame;
-var server = require("./server");
+global.projPath = __dirname;
+var server = require("./server/server");
 server.start();

@@ -35,20 +35,23 @@ function show(response) {
 	});
 }
 function getResources(response, request, pathName) {
-	console.log("dirname" + __filename);
-	console.log("dirname" + __dirname);
+	var webResPath = global.projPath + "\\web_resources";
+	console.log("dirname : " + webResPath + pathName.replace(/\//g, "\\"));
 	fs
-	.readFile(settings.PROJECT_DIR + pathName.replace(/\//g, "\\"), "binary", function(error, file) {
+	.readFile(webResPath + pathName.replace(/\//g, "\\"), "binary", function(error, file) {
 		if (error) {
-			response.writeHead(500, { "Content-Type" : "text/plain" });
+			console.log("exception!!!");
+			response.writeHead(404, { "Content-Type" : "text/plain" });
 			response.write(error + "\n");
 			response.end();
 		} else {
-			response.writeHead(200, { "Content-Type" : "image/png" });
+			console.log("success!!!");
+			response.writeHead(200, { "Content-Type" : "text/html" });
 			response.write(file, "binary");
 			response.end();
 		}
 	});
+	return true;
 }
 exports["/start"] = start;
 exports["/upload"] = upload;
