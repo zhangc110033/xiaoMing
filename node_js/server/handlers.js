@@ -1,4 +1,5 @@
-var querystring = require("querystring"), fs = require("fs"), formidable = require("formidable"), extension = require("./extension");
+var querystring = require("querystring"), fs = require("fs"), formidable = require("formidable");
+var extension = require("./extension"), db = require('./service/dbConnectService'), mongoose = require("mongoose");
 function start(response) {
 	console.log("Request handler 'start' was called.");
 	var body = '<html>' + '<head>' + '<meta http-equiv="Content-Type" content="text/html; ' + 'charset=UTF-8" />' + '</head>' + '<body>' + '<form action="/upload" enctype="multipart/form-data" ' + 'method="post">' + '<input type="file" name="upload" multiple="multiple">' + '<input type="submit" value="Upload file" />' + '</form>' + '</body>' + '</html>';
@@ -39,12 +40,12 @@ function getResources(response, request, pathName) {
 	var resPath = rootPath + (pathName === "/" ? "\\index.html" : pathName
 	.replace(/\//g, "\\"));
 	//文件后缀名
-	var pathArr = resPath.split("."), exts = pathArr[pathArr.length-1];
+	var pathArr = resPath.split("."), exts = pathArr[pathArr.length - 1];
 	fs.readFile(resPath, "binary", function(error, file) {
 		if (error) {
 			global.exception._400(response);
 		} else {
-			console.log("extension : "+extension);
+			console.log("extension : " + extension);
 			response
 			.writeHead(200, { "Content-Type" : extension[exts] || "text/html" });
 			response.write(file, "binary");
@@ -53,7 +54,31 @@ function getResources(response, request, pathName) {
 	});
 	return true;
 }
+//mongoDB数据库连接
+function save(response, request, pathName) {
+	var PersonSchema = new mongoose.Schema({ name : String });
+	var PersonModel = db.mongoose.model("Person", PersonSchema);
+	var personEntity = new PersonModel({ name : "candy" });
+	console.log(personEntity.name);
+	personEntity.save();
+	exception._200(response);
+}
+function get(response, request, pathName) {
+	var PersonSchema = new mongoose.Schema({ name : String, date : date });
+	var PersonModel = db.mongoose.model("Person", PersonSchema);
+	var personEntity = new PersonModel({
+		name : "Krouky",
+		date : new Date().toString() });
+	var name = PersonModel.find(function(err, persons) {
+		console.info(persons);
+		response.writeHead("Content-type", "text/plain");
+		response.write("200 ok");
+		response.end(persons.toString());
+	});
+}
 exports["/start"] = start;
 exports["/upload"] = upload;
 exports["/show"] = show;
 exports["getResources"] = getResources;
+exports["/save"] = save;
+exports["/get"] = get;
