@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: 18
       - name: print something
-        run: echo "run after 2 minutes"
+        run: echo "run after 2 minutes..."

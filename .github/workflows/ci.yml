@@ -1,16 +1,8 @@
-name: CI
+name: Delay CI
 
 on:
-  push:
-    branches:
-      - master
-      - dev
-  pull_request:
-    branches:
-      - master
-      - release-*
-      - dev
-
+  schedule:
+    - cron: '2 * * * *'
 
 jobs:
   ci:
@@ -20,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: Install yarn
-        run: npm install -g yarn
+      - name: print something
+        run: echo "run after 2 minutes"
 
       
