@@ -1,0 +1,16 @@
+name: Delay CI
+
+on:
+  schedule:
+    - cron: '2 * * * *'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: print something
+        run: echo "run after 2 minutes"
