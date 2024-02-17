@@ -2,7 +2,7 @@ name: Delay CI
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   ci:
