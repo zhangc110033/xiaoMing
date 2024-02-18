@@ -5,8 +5,8 @@ on:
     - cron: "*/5 * * * *"
 
 env:
-    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    DISABLE_WORKFLOW_URL: https://api.github.com/repos/zhangc110033/xiaoMing/actions/workflows/delay.yml/disable
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  DISABLE_WORKFLOW_URL: https://api.github.com/repos/zhangc110033/xiaoMing/actions/workflows/delay.yml/disable
 
 jobs:
   ci:
@@ -21,8 +21,7 @@ jobs:
 
       - name: Enable workflow
         run: |
-          curl -L \ 
-          -X PUT \ 
+          curl -X PUT \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer $GITHUB_TOKEN" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
