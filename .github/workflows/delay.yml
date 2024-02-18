@@ -19,7 +19,7 @@ jobs:
       - name: print something
         run: echo "run after 2 minutes..."
 
-      - name: Enable workflow
+      - name: Disable workflow
         run: |
           curl -X PUT \
           -H "Accept: application/vnd.github+json" \

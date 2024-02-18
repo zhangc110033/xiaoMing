@@ -14,9 +14,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: Install yarn
-        run: npm install -g yarn
 
+      - name: Make failure
+        run: exit 1
+          
       - name: Enable workflow
         run: |
           curl -X PUT \
