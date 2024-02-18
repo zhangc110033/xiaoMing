@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  ENABLE_WORKFLOW_URL: https://api.github.com/repos/zhangc110033/xiaoMing/actions/workflows/delay.yml/disable
+  ENABLE_WORKFLOW_URL: https://api.github.com/repos/zhangc110033/xiaoMing/actions/workflows/delay.yml/enable
 
 jobs:
   ci:
