@@ -14,9 +14,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-
-      - name: Make failure
-        run: exit 1
           
       - name: Enable workflow
         run: |
