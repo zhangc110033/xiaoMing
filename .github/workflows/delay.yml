@@ -1,11 +1,11 @@
 name: Delay CI
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "*/5 * * * *"
 
 env:
-  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   DISABLE_WORKFLOW_URL: https://api.github.com/repos/zhangc110033/xiaoMing/actions/workflows/delay.yml/disable
 
 jobs:
