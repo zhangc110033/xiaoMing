@@ -25,7 +25,6 @@ jobs:
       #     $ENABLE_WORKFLOW_URL
       
       - name: Notify
-        if: failure()
         run: |
           curl -X POST -H "Content-Type: application/json" \
            -d '{
