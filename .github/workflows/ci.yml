@@ -38,7 +38,7 @@ jobs:
                       {
                         "tag": "a",
                         "text": "Click here to check",
-                        "href": $GITHUB_WORKFLOW_URL
+                        "href": “${{env.GITHUB_WORKFLOW_URL}}”
                       }
                     ]
                   ]
