@@ -5,7 +5,7 @@ on: workflow_dispatch
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   ENABLE_WORKFLOW_URL: https://api.github.com/repos/zhangc110033/xiaoMing/actions/workflows/delay.yml/enable
-  GITHUB_WORKFLOW_URL: "${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}"
+  GITHUB_WORKFLOW_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
 
 jobs:
   ci:
@@ -38,7 +38,7 @@ jobs:
                       {
                         "tag": "a",
                         "text": "Click here to check",
-                        "href": "$GITHUB_WORKFLOW_URL"
+                        "href": $GITHUB_WORKFLOW_URL
                       }
                     ]
                   ]
