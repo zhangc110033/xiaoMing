@@ -47,4 +47,4 @@ jobs:
               }
             }
           }' \
-          https://open.feishu.cn/open-apis/bot/v2/hook/8017099d-418e-4cf0-8636-0bdae81be4e3
+          "https://open.feishu.cn/open-apis/bot/v2/hook/8017099d-418e-4cf0-8636-0bdae81be4e3"
